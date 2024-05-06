@@ -1,2 +1,3 @@
 # manjaro-download
-manjaro.download home
+
+url shortener for manjaro friends.

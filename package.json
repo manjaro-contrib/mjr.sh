@@ -1,0 +1,24 @@
+{
+  "name": "manjaro-search",
+  "version": "1.0.0",
+  "author": {
+    "email": "info@jonas-strassel.de",
+    "name": "Jonas Strassel",
+    "url": "https://jonas-strassel.de"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "echo nothing to build",
+    "db:purge": "npx wrangler d1 execute urls --file=./schema.sql",
+    "dev": "npx wrangler pages dev --d1 urls"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20221111.1",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "kysely": "^0.27.3",
+    "kysely-d1": "^0.3.0",
+    "zod": "^3.23.4"
+  }
+}

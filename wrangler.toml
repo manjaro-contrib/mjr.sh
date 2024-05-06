@@ -1,0 +1,7 @@
+name = "manjaro-download"
+pages_build_output_dir = "."
+
+[[ d1_databases ]]
+binding = "urls"
+database_name = "manjaro-download"
+database_id = "5e2f3375-8d68-405b-b3c3-ef4517219c08"
