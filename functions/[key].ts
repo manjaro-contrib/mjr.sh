@@ -9,6 +9,7 @@ export type Env = {
 type Table = {
   key: string;
   value: string;
+  secret: string;
   timestamp: string;
 };
 

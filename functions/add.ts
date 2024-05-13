@@ -27,8 +27,9 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .values({
       key: sql`hex(randomblob(2))`,
       value: input.data.url,
+      secret: sql`hex(randomblob(10))`,
     })
-    .returning("key")
+    .returning(["key", "secret"])
     .executeTakeFirstOrThrow();
 
 
@@ -36,5 +37,5 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   url.pathname = result.key;
   url.search = "";
 
-  return Response.json({ url: url.toString() });
+  return Response.json({ url: url.toString(), secret: result.secret });
 };
