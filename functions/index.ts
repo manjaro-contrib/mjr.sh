@@ -3,5 +3,6 @@ export const onRequest: PagesFunction = async (context) => {
 
   return Response.json({
     add: `${url.origin}/add?url=https://example.com`,
+    edit: `${url.origin}/edit/SECRET?url=https://example.com`,
   });
 };
