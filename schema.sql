@@ -6,3 +6,5 @@ CREATE TABLE urls (
     secret TEXT NOT NULL,
     timestamp DATETIME DEFAULT current_timestamp
 );
+
+CREATE INDEX IF NOT EXISTS idx_secret ON urls(secret);
