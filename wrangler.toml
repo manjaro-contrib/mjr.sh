@@ -1,7 +1,7 @@
-name = "manjaro-download"
+name = "mjr-sh"
 pages_build_output_dir = "."
 
 [[ d1_databases ]]
 binding = "urls"
-database_name = "manjaro-download"
-database_id = "5e2f3375-8d68-405b-b3c3-ef4517219c08"
+database_name = "mjr-sh"
+database_id = "9fb678f6-8435-4627-9b0f-7a9a8b8a3165"
