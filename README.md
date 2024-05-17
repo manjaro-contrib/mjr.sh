@@ -7,14 +7,14 @@ URL shortener for manjaro friends.
 ### Adding a short URL
 
 ```sh
-https://manjaro.download/add?url=https://example.com
+https://mjr.sh/add?url=https://example.com
 ```
 
 Which returns something like this:
 
 ```json
 {
-  "url": "https://manjaro.download/AAC3",
+  "url": "https://mjr.sh/AAC3",
   "secret": "FAB7D9A995385A422C96"
 }
 ```
@@ -24,7 +24,7 @@ Store the secret if you'd like to edit the URL afterwards.
 ### Editing the URL
 
 ```sh
-https://manjaro.download/edit/FAB7D9A995385A422C96?url=https://example.com
+https://mjr.sh/edit/FAB7D9A995385A422C96?url=https://example.com
 ```
 
 Which returns the same again.
