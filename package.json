@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "echo nothing to build",
+    "build": "npx markdown-to-html-cli",
     "db:purge": "npx wrangler d1 execute urls --file=./schema.sql",
     "dev": "npx wrangler pages dev --d1 urls"
   },

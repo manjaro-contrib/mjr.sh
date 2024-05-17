@@ -1,4 +1,4 @@
-# manjaro-download
+# mjr.sh
 
 URL shortener for manjaro friends.
 
