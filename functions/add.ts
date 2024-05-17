@@ -29,13 +29,26 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       value: input.data.url,
       secret: sql`hex(randomblob(10))`,
     })
-    .returning(["key", "secret"])
+    .returning(["key", "secret", "timestamp", "value"])
     .executeTakeFirstOrThrow();
-
 
   const url = new URL(context.request.url);
   url.pathname = result.key;
   url.search = "";
 
-  return Response.json({ url: url.toString(), secret: result.secret });
+  const editUrl = new URL(context.request.url);
+  editUrl.pathname = `edit/${result.secret}`;
+  editUrl.search = "";
+  editUrl.searchParams.set("url", "https://example.com");
+
+  const statsUrl = new URL(context.request.url);
+  statsUrl.pathname = `${result.key}/stats`;
+  statsUrl.search = "";
+
+  return Response.json({
+    url: url.toString(),
+    edit: editUrl.toString(),
+    stats: statsUrl.toString(),
+    ...result,
+  });
 };

@@ -13,12 +13,17 @@ URL shortener for manjaro friends.
 curl -s https://mjr.sh/add?url=https://example.com
 ```
 
-Which returns something like this:
+Which returns:
 
 ```json
 {
-  "url": "https://mjr.sh/AAC3",
-  "secret": "FAB7D9A995385A422C96"
+  "url": "https://mjr.sh/AB34",
+  "edit": "https://mjr.sh/edit/71B69B10C4C0B8ECFC11?url=https%3A%2F%2Fexample.com",
+  "stats": "https://mjr.sh/AB34/stats",
+  "key": "AB34",
+  "secret": "71B69B10C4C0B8ECFC11",
+  "timestamp": "2024-05-17 19:33:12",
+  "value": "https://example.com"
 }
 ```
 
@@ -27,10 +32,20 @@ Store the secret if you'd like to edit the URL afterwards.
 ### Editing the URL
 
 ```sh
-curl -s https://mjr.sh/edit/FAB7D9A995385A422C96?url=https://example.com
+curl -s https://mjr.sh/edit/71B69B10C4C0B8ECFC11?url=https://example.com
 ```
 
-Which returns the same again.
+Which returns:
+
+```json
+{
+  "url": "https://mjr.sh/AB34",
+  "key": "AB34",
+  "secret": "71B69B10C4C0B8ECFC11",
+  "timestamp": "2024-05-17 19:34:01",
+  "value": "https://example.com"
+}
+```
 
 ### Public visitor count
 
@@ -42,9 +57,10 @@ Which returns something like this
 
 ```json
 {
-  "key": "AAC3",
-  "count": 5,
-  "badge": "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fmjr.sh%2FAAC3%2Fstats&query=%24.count&label=redirects"
+  "key": "AB34",
+  "count": 1,
+  "timestamp": "2024-05-17 19:34:01",
+  "badge": "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fmjr.sh%2FAB34%2Fstats&query=%24.count&label=redirects"
 }
 ```
 

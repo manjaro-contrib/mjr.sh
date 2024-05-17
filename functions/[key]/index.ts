@@ -17,14 +17,17 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .where("key", "=", key)
     .executeTakeFirst();
 
-
   if (!result?.value) {
     return Response.json({ error: "Not found" }, { status: 404 });
   }
 
-  await db.updateTable("urls").where("key", "=", key).set({ count: sql`count + 1` }).execute();
+  await db
+    .updateTable("urls")
+    .where("key", "=", key)
+    .set({ count: sql`count + 1` })
+    .execute();
 
-  const response = Response.redirect(result?.value, 301);
+  const response = Response.redirect(result.value, 301);
 
   return response;
 };

@@ -20,7 +20,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   const result = await db
     .selectFrom("urls")
-    .select(["count"])
+    .select(["count", "timestamp"])
     .where("key", "=", key)
     .executeTakeFirst();
 
@@ -35,8 +35,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const response = Response.json(
     {
       key,
-      count: result?.count,
-      badge: `https://img.shields.io/badge/dynamic/json?url=${encodeURIComponent(statsUrl.toString())}&query=%24.count&label=redirects`,
+      ...result,
+      badge: `https://img.shields.io/badge/dynamic/json?url=${encodeURIComponent(
+        statsUrl.toString()
+      )}&query=%24.count&label=redirects`,
     },
     {
       headers: {

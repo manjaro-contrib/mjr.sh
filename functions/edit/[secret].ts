@@ -35,14 +35,22 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   }
 
   const { secret } = params.data;
-  const { url } = query.data;
+  const { url: value } = query.data;
 
   const result = await db
     .updateTable("urls")
     .where("secret", "=", secret)
-    .set({ value: url, timestamp: sql`CURRENT_TIMESTAMP` })
-    .returning(["key", "secret"])
-    .executeTakeFirstOrThrow();
+    .set({ value, timestamp: sql`CURRENT_TIMESTAMP` })
+    .returning(["key", "secret", "timestamp", "value"])
+    .executeTakeFirst();
 
-  return Response.json({ url: url.toString(), secret: result.secret });
+  if (!result) {
+    return Response.json({ error: "Not found" }, { status: 404 });
+  }
+
+  const url = new URL(context.request.url);
+  url.pathname = result.key;
+  url.search = "";
+
+  return Response.json({ url, ...result });
 };
