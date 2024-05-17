@@ -1,6 +1,6 @@
 import z from "zod";
-import { getDB, type Env } from "./[key]";
 import { sql } from "kysely";
+import { getDB, type Env } from "./utils";
 
 const queryValidator = z.object({
   url: z.string().url(),

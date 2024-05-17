@@ -1,5 +1,5 @@
 import z from "zod";
-import { getDB, type Env } from "../[key]";
+import { getDB, type Env } from "../utils";
 
 const paramsValidator = z.object({
   secret: z.string().length(20),
