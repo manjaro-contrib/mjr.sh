@@ -28,14 +28,6 @@ const paramsValidator = z.object({
 });
 
 export const onRequest: PagesFunction<Env> = async (context) => {
-  const cache = caches.default;
-  const response = await cache.match(context.request);
-
-  if (response) {
-    console.info("cache hit");
-    return response;
-  }
-
   const db = getDB(context.env);
 
   const input = paramsValidator.safeParse(context.params);
@@ -51,5 +43,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .where("key", "=", key)
     .executeTakeFirstOrThrow();
 
-  return Response.redirect(result.value, 301);
+  const response = Response.redirect(result.value, 301);
+
+  return response;
 };
