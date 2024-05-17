@@ -1,5 +1,6 @@
 import z from "zod";
 import { getDB, type Env } from "../utils";
+import { sql } from "kysely";
 
 const paramsValidator = z.object({
   secret: z.string().length(20),
@@ -39,7 +40,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const result = await db
     .updateTable("urls")
     .where("secret", "=", secret)
-    .set({ value: url })
+    .set({ value: url, timestamp: sql`CURRENT_TIMESTAMP` })
     .returning(["key", "secret"])
     .executeTakeFirstOrThrow();
 

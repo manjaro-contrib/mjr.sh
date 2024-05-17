@@ -1,9 +1,5 @@
-import z from "zod";
-import { getDB, type Env } from "../../utils";
-
-const paramsValidator = z.object({
-  key: z.string().length(4),
-});
+import { sql } from "kysely";
+import { getDB, type Env, paramsValidator } from "../utils";
 
 export const onRequest: PagesFunction<Env> = async (context) => {
   const db = getDB(context.env);
@@ -19,9 +15,16 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .selectFrom("urls")
     .select(["value"])
     .where("key", "=", key)
-    .executeTakeFirstOrThrow();
+    .executeTakeFirst();
 
-  const response = Response.redirect(result.value, 301);
+
+  if (!result?.value) {
+    return Response.json({ error: "Not found" }, { status: 404 });
+  }
+
+  await db.updateTable("urls").where("key", "=", key).set({ count: sql`count + 1` }).execute();
+
+  const response = Response.redirect(result?.value, 301);
 
   return response;
 };
