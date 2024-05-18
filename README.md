@@ -15,6 +15,8 @@ URL shortener for manjaro friends.
   <input id="submit" type="submit" value="Generate">
 </form>
 
+<div id="result"></div>
+
 ```sh
 curl -s https://mjr.sh/add?url=https://example.com
 ```
@@ -77,3 +79,18 @@ Which returns something like this
 - all of this makes use of the generous free tiers of cloudflare workers and [d1](https://developers.cloudflare.com/d1/platform/pricing/), so 100k links can be added per day and they can be read 5 Mio times per day and take up virtually no space. We should be good for a long time :tm:
 - no information is being stored on who created the links
 - stats are cached for 60 seconds
+
+<script async>
+  var result = document.querySelector('#result')
+  var searchParams = new URLSearchParams(document.location.search)
+  var params = Object.fromEntries(searchParams);
+
+  if (params["url"]) {
+    var pre = document.querySelector(".language-sh").cloneNode(true)
+    var copied = pre.querySelector(".copied")
+    copied.setAttribute('data-code', params["url"])
+    var content = pre.querySelector("code").querySelector("span")
+    content.innerHTML = `url: <a href="${params["url"]}">${params["url"]}</a>\nedit: <a href="${params["edit"]}">${params["edit"]}</a>\nstats: <a href="${params["stats"]}">${params["stats"]}</a>`
+    result.appendChild(pre);
+  }
+</script>

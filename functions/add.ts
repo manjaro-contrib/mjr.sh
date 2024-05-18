@@ -7,6 +7,7 @@ const queryValidator = z.object({
 });
 
 export const onRequest: PagesFunction<Env> = async (context) => {
+  console.log(context.request.headers)
   const { searchParams } = new URL(context.request.url);
   const input = queryValidator.safeParse(Object.fromEntries(searchParams));
 
@@ -54,13 +55,23 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     statsUrl.pathname = `${result.key}/stats`;
     statsUrl.search = "";
 
-    return Response.json({
+    const values = {
       url: url.toString(),
       edit: editUrl.toString(),
       stats: statsUrl.toString(),
       ...result,
       secret: plaintextSecret,
-    });
+    };
+
+    const accepts = context.request.headers.get("accept").split(",");
+    if (accepts.includes("text/html") && !accepts.includes("application/json")) {
+      const url = new URL(context.request.url);
+      url.pathname = "";
+      url.search = new URLSearchParams(values).toString();
+      return Response.redirect(url.toString(), 302);
+    }
+
+    return Response.json(values);
   } catch (e) {
     return Response.json({ error: e.message }, { status: 400 });
   }
