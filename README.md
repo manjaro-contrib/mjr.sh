@@ -74,11 +74,13 @@ Which returns something like this
 
 ## Notes
 
-- if you'd like a little cli wrapper-script, check out [the one used in manjaro-sway](https://mjr.sh/11F8)
-- references to `https://example.com` are being purged on a regular basis
-- all of this makes use of the generous free tiers of cloudflare workers and [d1](https://developers.cloudflare.com/d1/platform/pricing/), so 100k links can be added per day and they can be read 5 Mio times per day and take up virtually no space. We should be good for a long time :tm:
-- no information is being stored on who created the links
-- stats are cached for 60 seconds
+- Links are deleted after 14 days, except if their domains are on the [whitelist](https://github.com/manjaro-contrib/mjr.sh/blob/main/functions/whitelist.ts) - PRs welcome!
+- If you'd like to add a url to the exclusion list, open an issue.
+- If you'd like a little cli wrapper-script, check out [the one used in manjaro-sway](https://mjr.sh/11F8)
+- All of this makes use of the generous free tiers of cloudflare workers and [d1](https://developers.cloudflare.com/d1/platform/pricing/), so 100k links can be added per day and they can be read 5 Mio times per day and take up virtually no space. We should be good for a long time :tm:
+- No information is being stored on who created the links
+- Stats are cached for 60 seconds
+- If there's a reason to communicate on a direct channel (abuse), send an email to [info@mjr.sh](mailto:info@mjr.sh)
 
 <script async>
   var result = document.querySelector('#result')

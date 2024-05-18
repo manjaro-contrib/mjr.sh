@@ -1,6 +1,7 @@
 import z from "zod";
 import { sql } from "kysely";
 import { createHash, getDB, type Env } from "./utils";
+import allowList, { getCutoffDate } from "./allowList";
 
 const queryValidator = z.object({
   url: z.string().url(),
@@ -17,18 +18,24 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   const db = getDB(context.env);
 
-  const cutOff = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString();
+  const shouldCleanup = Math.floor(Math.random() * 10) === 0;
 
-  // cleanup non-manjaro links older than 30 days
-  await db
-    .deleteFrom("urls")
-    .where((eb) =>
-      eb(sql`strftime('%Y-%m-%dT%H:%M:%fZ', timestamp)`, "<", cutOff)
-        .and("value", "not like", "%manjaro.org%")
-        .and("value", "not like", "%manjaro.download%")
-        .and("value", "not like", "%manjaro-sway.download%")
-    )
-    .execute();
+  // cleanup non-manjaro links older than 14 days
+  if (shouldCleanup) {
+    await db
+      .deleteFrom("urls")
+      .where((eb) => {
+        const q = eb("timestamp", "<", getCutoffDate());
+        for (const domain of allowList) {
+          q.and("value", "not like", `https://${domain}%`);
+          q.and("value", "not like", `https://www.${domain}%`);
+          q.and("value", "not like", `http://${domain}%`);
+          q.and("value", "not like", `http://www.${domain}%`);
+        }
+        return q;
+      })
+      .execute();
+  }
 
   const { hash, plaintextSecret } = await createHash({
     plaintextSecret: crypto.randomUUID(),
