@@ -7,7 +7,7 @@ const queryValidator = z.object({
 });
 
 export const onRequest: PagesFunction<Env> = async (context) => {
-  console.log(context.request.headers)
+  console.log(context.request.headers);
   const { searchParams } = new URL(context.request.url);
   const input = queryValidator.safeParse(Object.fromEntries(searchParams));
 
@@ -17,10 +17,17 @@ export const onRequest: PagesFunction<Env> = async (context) => {
 
   const db = getDB(context.env);
 
-  // cleanup examples
+  const cutOff = new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString();
+
+  // cleanup non-manjaro links older than 30 days
   await db
     .deleteFrom("urls")
-    .where("value", "=", "https://example.com")
+    .where((eb) =>
+      eb(sql`strftime('%Y-%m-%dT%H:%M:%fZ', timestamp)`, "<", cutOff)
+        .and("value", "not like", "%manjaro.org%")
+        .and("value", "not like", "%manjaro.download%")
+        .and("value", "not like", "%manjaro-sway.download%")
+    )
     .execute();
 
   const { hash, plaintextSecret } = await createHash({
@@ -64,7 +71,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     };
 
     const accepts = context.request.headers.get("accept").split(",");
-    if (accepts.includes("text/html") && !accepts.includes("application/json")) {
+    if (
+      accepts.includes("text/html") &&
+      !accepts.includes("application/json")
+    ) {
       const url = new URL(context.request.url);
       url.pathname = "";
       url.search = new URLSearchParams(values).toString();
