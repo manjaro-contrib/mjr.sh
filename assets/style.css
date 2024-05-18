@@ -1,0 +1,8 @@
+[data-color-mode*="dark"] input#url {
+  background-color: #fff;
+  color: #000;
+}
+
+#form {
+  padding-bottom: 1rem;
+}
