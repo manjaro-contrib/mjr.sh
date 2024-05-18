@@ -26,11 +26,13 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     plaintextSecret: crypto.randomUUID(),
     salt: context.env.SALT,
   });
+  // int between 3 and 6
+  const keyLength = Math.floor(Math.random() * 4) + 3;
 
   const result = await db
     .insertInto("urls")
     .values({
-      key: sql`hex(randomblob(2))`,
+      key: sql`substr(hex(randomblob(3)), 0, ${keyLength})`,
       value: input.data.url,
       secret: hash,
     })

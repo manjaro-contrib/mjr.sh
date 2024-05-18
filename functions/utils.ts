@@ -3,7 +3,8 @@ import { D1Dialect } from "kysely-d1";
 import z from "zod";
 
 export const paramsValidator = z.object({
-  key: z.string().length(4),
+  // the key is 2 or 3 bytes long, which are 4 or 6 characters in hex
+  key: z.string().length(4).or(z.string().length(6)),
 });
 
 export type Env = {
