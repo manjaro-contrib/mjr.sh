@@ -18,13 +18,13 @@ Which returns:
 
 ```json
 {
-  "url": "https://mjr.sh/AB34",
-  "edit": "https://mjr.sh/edit/71B69B10C4C0B8ECFC11?url=https%3A%2F%2Fexample.com",
-  "stats": "https://mjr.sh/AB34/stats",
-  "key": "AB34",
-  "secret": "71B69B10C4C0B8ECFC11",
-  "timestamp": "2024-05-17 19:33:12",
-  "value": "https://example.com"
+  "url": "https://mjr.sh/C7D3",
+  "edit": "https://mjr.sh/C7D3/edit?url=https%3A%2F%2Fexample.com&secret=4673cab7-6d01-479c-97b2-999010fa8987",
+  "stats": "https://mjr.sh/C7D3/stats",
+  "key": "C7D3",
+  "timestamp": "2024-05-18 12:58:17",
+  "value": "https://example.com",
+  "secret": "4673cab7-6d01-479c-97b2-999010fa8987"
 }
 ```
 
@@ -33,32 +33,32 @@ Store the secret if you'd like to edit the URL afterwards.
 ### Editing the URL
 
 ```sh
-curl -s https://mjr.sh/edit/71B69B10C4C0B8ECFC11?url=https://example.com
+curl -s https://mjr.sh/C7D3/edit?secret=4673cab7-6d01-479c-97b2-999010fa8987&url=https%3A%2F%2Fexample.de
 ```
 
 Which returns:
 
 ```json
 {
-  "url": "https://mjr.sh/AB34",
-  "key": "AB34",
-  "secret": "71B69B10C4C0B8ECFC11",
-  "timestamp": "2024-05-17 19:34:01",
-  "value": "https://example.com"
+  "url": "https://mjr.sh/C7D3",
+  "key": "C7D3",
+  "timestamp": "2024-05-18 12:59:30",
+  "value": "https://example.de",
+  "secret": "4673cab7-6d01-479c-97b2-999010fa8987"
 }
 ```
 
 ### Public visitor count
 
 ```sh
-curl -s https://mjr.sh/AAC3/stats
+curl -s https://mjr.sh/C7D3/stats
 ```
 
 Which returns something like this
 
 ```json
 {
-  "key": "AB34",
+  "key": "C7D3",
   "count": 1,
   "timestamp": "2024-05-17 19:34:01",
   "badge": "https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fmjr.sh%2FAB34%2Fstats&query=%24.count&label=redirects"

@@ -1,6 +1,6 @@
 import z from "zod";
 import { sql } from "kysely";
-import { getDB, type Env } from "./utils";
+import { createHash, getDB, type Env } from "./utils";
 
 const queryValidator = z.object({
   url: z.string().url(),
@@ -22,14 +22,19 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .where("value", "=", "https://example.com")
     .execute();
 
+  const { hash, plaintextSecret } = await createHash({
+    plaintextSecret: crypto.randomUUID(),
+    salt: context.env.SALT,
+  });
+
   const result = await db
     .insertInto("urls")
     .values({
       key: sql`hex(randomblob(2))`,
       value: input.data.url,
-      secret: sql`hex(randomblob(10))`,
+      secret: hash,
     })
-    .returning(["key", "secret", "timestamp", "value"])
+    .returning(["key", "timestamp", "value"])
     .executeTakeFirstOrThrow();
 
   const url = new URL(context.request.url);
@@ -37,8 +42,9 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   url.search = "";
 
   const editUrl = new URL(context.request.url);
-  editUrl.pathname = `edit/${result.secret}`;
+  editUrl.pathname = `${result.key}/edit`;
   editUrl.search = "";
+  editUrl.searchParams.set("secret", plaintextSecret);
   editUrl.searchParams.set("url", "https://example.com");
 
   const statsUrl = new URL(context.request.url);
@@ -50,5 +56,6 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     edit: editUrl.toString(),
     stats: statsUrl.toString(),
     ...result,
+    secret: plaintextSecret,
   });
 };

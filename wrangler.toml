@@ -5,3 +5,6 @@ pages_build_output_dir = "."
 binding = "urls"
 database_name = "mjr-sh"
 database_id = "9fb678f6-8435-4627-9b0f-7a9a8b8a3165"
+
+[vars]
+API_KEY = "1234567asdf"
