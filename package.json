@@ -1,5 +1,6 @@
 {
   "name": "mjr.sh",
+  "description": "A simple URL shortener for manjaro friends.",
   "version": "1.0.0",
   "author": {
     "email": "info@jonas-strassel.de",
@@ -7,6 +8,14 @@
     "url": "https://jonas-strassel.de"
   },
   "license": "MIT",
+  "repository": {
+    "url": "https://mjr.sh/C736"
+  },
+  "keywords": [
+    "url",
+    "shortener",
+    "manjaro"
+  ],
   "scripts": {
     "build": "npx markdown-to-html-cli",
     "db:purge": "npx wrangler d1 execute urls --file=./schema.sql",
@@ -20,5 +29,8 @@
     "kysely": "^0.27.3",
     "kysely-d1": "^0.3.0",
     "zod": "^3.23.4"
+  },
+  "markdown-to-html": {
+    "favicon": "/assets/favicon.svg"
   }
 }
