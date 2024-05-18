@@ -27,7 +27,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .set({ count: sql`count + 1` })
     .execute();
 
-  const response = Response.redirect(result.value, 301);
+  const response = Response.redirect(result.value, 307);
 
   return response;
 };
