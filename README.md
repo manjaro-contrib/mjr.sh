@@ -6,9 +6,14 @@
 
 URL shortener for manjaro friends.
 
-## Usage
+## Try it out
 
 ### Adding a short URL
+
+<form id="form" method="GET" action="https://mjr.sh/add">
+  <input id="url" type="text" name="url" placeholder="https://example.com" pattern="https://.*" required>
+  <input id="submit" type="submit" value="Generate">
+</form>
 
 ```sh
 curl -s https://mjr.sh/add?url=https://example.com
