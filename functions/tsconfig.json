@@ -5,6 +5,20 @@
     "module": "NodeNext",
     "lib": ["esnext"],
     "types": ["@cloudflare/workers-types"],
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "isolatedModules": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitThis": true,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "noErrorTruncation": true
   }
 }

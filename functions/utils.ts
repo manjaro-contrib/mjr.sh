@@ -1,4 +1,4 @@
-import { Kysely } from "kysely";
+import { Kysely, type Generated } from "kysely";
 import { D1Dialect } from "kysely-d1";
 import z from "zod";
 
@@ -14,9 +14,9 @@ export type Env = {
 type Table = {
   key: string;
   value: string;
-  count: number;
+  count: Generated<number>;
   secret: string;
-  timestamp: string;
+  timestamp: Generated<string>;
   domain: string;
 };
 

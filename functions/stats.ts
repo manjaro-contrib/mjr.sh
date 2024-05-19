@@ -17,7 +17,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     .executeTakeFirst();
 
   const statsUrl = new URL(context.request.url);
-  statsUrl.pathname = `/stats`;
+  statsUrl.pathname = "/stats";
   statsUrl.search = "";
 
   const response = Response.json(

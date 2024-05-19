@@ -22,7 +22,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const { searchParams } = new URL(context.request.url);
   const input = queryValidator.safeParse(Object.fromEntries(searchParams));
 
-  if (input.error) {
+  if (input.error || !input.data?.url) {
     return Response.json(input.error, { status: 400 });
   }
 
@@ -87,7 +87,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       secret: plaintextSecret,
     };
 
-    const accepts = context.request.headers.get("accept").split(",");
+    const accepts = context.request.headers.get("accept")?.split(",") ?? [];
     if (
       accepts.includes("text/html") &&
       !accepts.includes("application/json")
@@ -99,7 +99,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     }
 
     return Response.json(values);
-  } catch (e) {
-    return Response.json({ error: e.message }, { status: 400 });
+  } catch (error) {
+    return Response.json({ error: (error as Error).message }, { status: 400 });
   }
 };
