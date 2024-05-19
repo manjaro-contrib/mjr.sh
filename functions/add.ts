@@ -4,7 +4,17 @@ import { createHash, getDB, type Env } from "./utils";
 import allowList, { getCutoffDate } from "./allowList";
 
 const queryValidator = z.object({
-  url: z.string().url(),
+  url: z
+    .string()
+    .url()
+    .refine(
+      (url) => new URL(url).protocol === "https",
+      "Only HTTPS URLs are allowed"
+    )
+    .refine(
+      (url) => new URL(url).hostname.length > 3,
+      "Length of hostname must be greater than 3"
+    ),
 });
 
 export const onRequest: PagesFunction<Env> = async (context) => {
@@ -12,7 +22,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const { searchParams } = new URL(context.request.url);
   const input = queryValidator.safeParse(Object.fromEntries(searchParams));
 
-  if (!input.data.url) {
+  if (input.error) {
     return Response.json(input.error, { status: 400 });
   }
 
