@@ -8,7 +8,7 @@ const queryValidator = z.object({
     .string()
     .url()
     .refine(
-      (url) => new URL(url).protocol === "https",
+      (url) => new URL(url).protocol === "https:",
       "Only HTTPS URLs are allowed"
     )
     .refine(
