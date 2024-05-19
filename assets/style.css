@@ -6,3 +6,7 @@
 #form {
   padding-bottom: 1rem;
 }
+
+div#result pre {
+  border: 4px solid greenyellow;
+}
