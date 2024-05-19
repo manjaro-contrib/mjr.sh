@@ -82,17 +82,21 @@ Which returns something like this
 - Stats are cached for 60 seconds
 - If there's a reason to communicate on a direct channel (abuse), send an email to [info@mjr.sh](mailto:info@mjr.sh)
 
-<script async>
-  var result = document.querySelector('#result')
-  var searchParams = new URLSearchParams(document.location.search)
-  var params = Object.fromEntries(searchParams);
+<details>
+  <summary>Script</summary>
+  
+  <script async>
+    var result = document.querySelector('#result')
+    var searchParams = new URLSearchParams(document.location.search)
+    var params = Object.fromEntries(searchParams);
 
-  if (params["url"]) {
-    var pre = document.querySelector(".language-sh").cloneNode(true)
-    var copied = pre.querySelector(".copied")
-    copied.setAttribute('data-code', params["url"])
-    var content = pre.querySelector("code").querySelector("span")
-    content.innerHTML = `url: <a href="${params["url"]}">${params["url"]}</a>\nedit: <a href="${params["edit"]}">${params["edit"]}</a>\nstats: <a href="${params["stats"]}">${params["stats"]}</a>`
-    result.appendChild(pre);
-  }
-</script>
+    if (params["url"]) {
+      var pre = document.querySelector(".language-sh").cloneNode(true)
+      var copied = pre.querySelector(".copied")
+      copied.setAttribute('data-code', params["url"])
+      var content = pre.querySelector("code").querySelector("span")
+      content.innerHTML = `url: <a href="${params["url"]}">${params["url"]}</a>\nedit: <a href="${params["edit"]}">${params["edit"]}</a>\nstats: <a href="${params["stats"]}">${params["stats"]}</a>`
+      result.appendChild(pre);
+    }
+  </script>
+</details>
