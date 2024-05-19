@@ -24,16 +24,9 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   if (shouldCleanup) {
     await db
       .deleteFrom("urls")
-      .where((eb) => {
-        const q = eb("timestamp", "<", getCutoffDate());
-        for (const domain of allowList) {
-          q.and("value", "not like", `https://${domain}%`);
-          q.and("value", "not like", `https://www.${domain}%`);
-          q.and("value", "not like", `http://${domain}%`);
-          q.and("value", "not like", `http://www.${domain}%`);
-        }
-        return q;
-      })
+      .where((eb) =>
+        eb("timestamp", "<", getCutoffDate()).and("domain", "not in", allowList)
+      )
       .execute();
   }
 
@@ -43,6 +36,12 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   });
   // int between 4 and 7
   const keyLength = Math.floor(Math.random() * 4) + 4;
+  const domain = new URL(input.data.url).hostname
+    .split(".")
+    .reverse()
+    .splice(0, 2)
+    .reverse()
+    .join(".");
 
   try {
     const result = await db
@@ -51,6 +50,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         key: sql`substr(hex(randomblob(3)), 0, ${keyLength})`,
         value: input.data.url,
         secret: hash,
+        domain,
       })
       .returning(["key", "timestamp", "value"])
       .executeTakeFirstOrThrow();

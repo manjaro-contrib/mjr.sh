@@ -17,6 +17,7 @@ type Table = {
   count: number;
   secret: string;
   timestamp: string;
+  domain: string;
 };
 
 interface Database {

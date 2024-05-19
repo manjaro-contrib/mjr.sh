@@ -2,20 +2,15 @@
  * List of domains that are _not_ purged after the cutOff date.
  */
 const allowList = [
-  "books.google.de",
-  "files.manjaro.org",
-  "forum.manjaro.org",
   "github.com",
   "gitlab.com",
-  "gitlab.manjaro.org",
   "google.com",
+  "google.de",
   "heise.de",
   "manjaro.org",
   "manjaro.download",
   "manjaro-sway.download",
-  "packages.manjaro.org",
-  "raw.githubusercontent.com",
-  "wiki.manjaro.org",
+  "githubusercontent.com",
   "youtube.com",
 ];
 
