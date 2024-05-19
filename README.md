@@ -74,7 +74,7 @@ Which returns something like this
 
 ## Notes
 
-- Links are deleted after 14 days, except if their domains are on the [whitelist](https://github.com/manjaro-contrib/mjr.sh/blob/main/functions/whitelist.ts) - PRs welcome!
+- Links are deleted after 14 days, except if their domains are on the [allowList](https://github.com/manjaro-contrib/mjr.sh/blob/main/functions/allowList.ts) - PRs welcome!
 - If you'd like to add a url to the exclusion list, open an issue.
 - If you'd like a little cli wrapper-script, check out [the one used in manjaro-sway](https://mjr.sh/11F8)
 - All of this makes use of the generous free tiers of cloudflare workers and [d1](https://developers.cloudflare.com/d1/platform/pricing/), so 100k links can be added per day and they can be read 5 Mio times per day and take up virtually no space. We should be good for a long time :tm:
