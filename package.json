@@ -23,7 +23,7 @@
     "check": "npx @biomejs/biome check --apply **/*.{ts,json}"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.0",
+    "@biomejs/biome": "1.9.1",
     "@cloudflare/workers-types": "^4.20221111.1",
     "typescript": "^5.0.0"
   },
