@@ -28,7 +28,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "kysely": "^0.27.3",
+    "kysely": "^0.28.0",
     "kysely-d1": "^0.3.0",
     "zod": "^4.0.0"
   },
