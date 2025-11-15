@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "kysely": "^0.28.0",
-    "kysely-d1": "^0.3.0",
+    "kysely-d1": "^0.4.0",
     "zod": "^4.0.0"
   },
   "markdown-to-html": {
