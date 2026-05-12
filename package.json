@@ -17,22 +17,23 @@
     "manjaro"
   ],
   "scripts": {
-    "build": "npx markdown-to-html-cli --style ./assets/style.css",
-    "db:purge": "npx wrangler d1 execute urls --file=./schema.sql",
-    "dev": "npx wrangler pages dev --d1 urls",
-    "check": "npx @biomejs/biome check --apply **/*.{ts,json}"
+    "build": "bunx markdown-to-html-cli --style ./assets/style.css",
+    "db:purge": "bunx wrangler d1 execute urls --file=./schema.sql",
+    "dev": "bunx wrangler pages dev --d1 urls",
+    "check": "bunx @biomejs/biome check --apply **/*.{ts,json}"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.5",
-    "@cloudflare/workers-types": "^4.20221111.1",
-    "typescript": "^5.0.0"
+    "@cloudflare/workers-types": "^4.20260509.1",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
-    "kysely": "^0.28.0",
+    "kysely": "^0.28.17",
     "kysely-d1": "^0.4.0",
-    "zod": "^4.0.0"
+    "zod": "^4.4.3"
   },
   "markdown-to-html": {
     "favicon": "/assets/favicon.svg"
-  }
+  },
+  "packageManager": "bun@1.3.12"
 }

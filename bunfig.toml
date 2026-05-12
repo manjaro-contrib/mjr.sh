@@ -1,0 +1,6 @@
+[install]
+# Block packages published less than 3 days ago to blunt supply-chain attacks.
+# minimumReleaseAgeExcludes accepts exact package names only (no wildcards);
+# add @boredland/* packages explicitly here when needed.
+minimumReleaseAge = 259200
+minimumReleaseAgeExcludes = ["@boredland"]
