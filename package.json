@@ -25,7 +25,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.5",
     "@cloudflare/workers-types": "^4.20260509.1",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.0"
   },
   "dependencies": {
     "kysely": "^0.28.17",
