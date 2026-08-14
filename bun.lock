@@ -5,14 +5,14 @@
     "": {
       "name": "mjr.sh",
       "dependencies": {
-        "kysely": "^0.28.0",
+        "kysely": "^0.29.0",
         "kysely-d1": "^0.4.0",
-        "zod": "^4.0.0",
+        "zod": "^4.4.3",
       },
       "devDependencies": {
         "@biomejs/biome": "2.3.5",
-        "@cloudflare/workers-types": "^4.20221111.1",
-        "typescript": "^5.0.0",
+        "@cloudflare/workers-types": "^4.20260509.1",
+        "typescript": "^5.9.3",
       },
     },
   },
@@ -37,7 +37,7 @@
 
     "@cloudflare/workers-types": ["@cloudflare/workers-types@4.20260509.1", "", {}, "sha512-jFlTTD+0MK/01TdL5sHIsQ8RqzfmvBsGl4hSp87INv2+JIs/JF6EL9J8enuCz6z3fNdfOKISNbGCIrzZRXVrcw=="],
 
-    "kysely": ["kysely@0.28.17", "", {}, "sha512-nbD8lB9EB3wNdMhOCdx5Li8DxnLbvKByylRLcJ1h+4SkrowVeECAyZlyiKMThF7xFdRz0jSQ2MoJr+wXux2y0Q=="],
+    "kysely": ["kysely@0.29.5", "", {}, "sha512-ooa+eSbBNPTo3MycPEuW5jdrxQdQwdtB3LC3h43FiXQbIry5tR0C5lDG7eealK0E4D7XjrnOP5DIUg/LyjRMYQ=="],
 
     "kysely-d1": ["kysely-d1@0.4.0", "", { "peerDependencies": { "kysely": "*" } }, "sha512-wUcVvQNtm30OTfuo7Ad5vYJ1qHqPXOCZc+zWchVKNyuvqY3u8OuGw4gmUx1Ypdx2wRVFLHVQC9I7v0pTmF7Nkw=="],
 
